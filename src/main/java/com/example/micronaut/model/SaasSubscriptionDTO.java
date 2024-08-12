@@ -1,11 +1,18 @@
 package com.example.micronaut.model;
 
-import io.micronaut.data.annotation.Id;
+import io.micronaut.core.annotation.Introspected;
+import io.micronaut.core.annotation.NonNull;
 import io.micronaut.serde.annotation.Serdeable;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 
 @Serdeable
-public record SaasSubscriptionDTO(@Id Long id, String name, Integer cents) {
+@Introspected
+public record SaasSubscriptionDTO(Long id,
+                                  @NotNull(message = "Name is required") @NonNull @NotEmpty(message = "Name cannot be empty") @NotBlank(message = "Name cannot be blank") String name,
+                                  @NotNull(message = "Cents is required") @NonNull Integer cents) {
 
     public SaasSubscriptionDTO(SaasSubscriptionEntity s) {
         this(s.id(), s.name(), s.cents());

@@ -7,8 +7,11 @@ import com.example.micronaut.repository.SaasSubscriptionRepository;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.annotation.*;
+import io.micronaut.validation.Validated;
+import jakarta.validation.Valid;
 
 @Controller("/api/subscriptions")
+@Validated
 public class SaasSubscriptionController {
 
 
@@ -20,7 +23,7 @@ public class SaasSubscriptionController {
 
 
     @Post
-    HttpResponse<SaasSubscriptionDTO> create(@Body SaasSubscriptionDTO saasDTO) {
+    HttpResponse<SaasSubscriptionDTO> create(@Valid @Body SaasSubscriptionDTO saasDTO) {
         var e = this.repository.save(new SaasSubscriptionEntity(saasDTO));
         return  HttpResponse.status(HttpStatus.CREATED).body(new SaasSubscriptionDTO(e));
     }
