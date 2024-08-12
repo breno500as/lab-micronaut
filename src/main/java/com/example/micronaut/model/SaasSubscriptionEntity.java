@@ -12,6 +12,9 @@ public record SaasSubscriptionEntity(@Id @GeneratedValue(value = GeneratedValue.
                                      String name,
                                      Integer cents) {
 
+    public SaasSubscriptionEntity(String name, Integer cents) {
+        this(null, name, cents);
+    }
 
     public SaasSubscriptionEntity(SaasSubscriptionDTO saasSubscriptionDTO) {
         this(saasSubscriptionDTO.id(), saasSubscriptionDTO.name(), saasSubscriptionDTO.cents());
