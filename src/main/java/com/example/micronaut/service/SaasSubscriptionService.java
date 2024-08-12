@@ -1,5 +1,6 @@
 package com.example.micronaut.service;
 
+import com.example.micronaut.error.NotFoundException;
 import com.example.micronaut.model.SaasSubscriptionDTO;
 import com.example.micronaut.model.SaasSubscriptionEntity;
 import com.example.micronaut.repository.SaasSubscriptionRepository;
@@ -8,7 +9,6 @@ import io.micronaut.data.model.Sort;
 import jakarta.inject.Singleton;
 
 import java.util.List;
-import java.util.Optional;
 
 @Singleton
 public class SaasSubscriptionService {
@@ -21,8 +21,9 @@ public class SaasSubscriptionService {
         this.repository = repository;
     }
 
-    public Optional<SaasSubscriptionEntity> findById(Long id) {
-        return this.repository.findById(id);
+    public SaasSubscriptionDTO findById(Long id) {
+        return this.repository.findById(id).map(SaasSubscriptionDTO::new).orElseThrow(() -> new NotFoundException("Subscription Not Found Exception"));
+
     }
 
     public SaasSubscriptionDTO save(SaasSubscriptionDTO saasDTO) {

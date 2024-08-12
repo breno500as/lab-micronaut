@@ -47,9 +47,7 @@ public class SaasSubscriptionController {
 
     @Get("/{id}")
     HttpResponse<SaasSubscriptionDTO> findById(@PathVariable Long id) {
-        return service.findById(id)
-                .map(SaasSubscriptionDTO::new)
-                .map(HttpResponse::ok)
-                .orElseGet(HttpResponse::notFound);
+        return HttpResponse.ok(service.findById(id));
+
     }
 }
