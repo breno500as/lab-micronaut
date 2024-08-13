@@ -3,6 +3,7 @@ package com.example.micronaut.controller;
 
 import com.example.micronaut.model.SaasSubscriptionDTO;
 import com.example.micronaut.service.SaasSubscriptionService;
+import io.micronaut.context.annotation.Value;
 import io.micronaut.data.model.Pageable;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.HttpStatus;
@@ -15,6 +16,10 @@ import java.util.List;
 @Controller("/api/subscriptions")
 @Validated
 public class SaasSubscriptionController {
+
+
+    @Value("${TESTE_ABC:teste}")
+    private String myEnvVariable;
 
 
     private final SaasSubscriptionService service;
