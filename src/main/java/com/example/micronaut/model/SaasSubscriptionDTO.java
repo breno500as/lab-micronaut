@@ -17,4 +17,8 @@ public record SaasSubscriptionDTO(Long id,
     public SaasSubscriptionDTO(SaasSubscriptionEntity s) {
         this(s.id(), s.name(), s.cents());
     }
+
+    public SaasSubscriptionDTO(String name, Integer cents) {
+        this(null, name, cents);
+    }
 }
